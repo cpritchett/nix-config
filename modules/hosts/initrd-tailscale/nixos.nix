@@ -10,11 +10,11 @@
 
 with lib;
 let
-  cfg = config.yomaq.initrd-tailscale;
+  cfg = config.cpritchett.initrd-tailscale;
 in
 {
   options = {
-    yomaq.initrd-tailscale = {
+    cpritchett.initrd-tailscale = {
         enable = mkOption {
         type = types.bool;
         default = false;
@@ -69,11 +69,11 @@ in
 
     in 
     mkMerge [ 
-    (mkIf (config.boot.initrd.network.enable && !config.yomaq.disks.amReinstalling && cfg.enable) {
+    (mkIf (config.boot.initrd.network.enable && !config.cpritchett.disks.amReinstalling && cfg.enable) {
 
     nixpkgs.overlays = [ TailscaleWrappedOverlay ];
 
-    yomaq.initrd-tailscale.package = pkgs.tailscale-wrapped;
+    cpritchett.initrd-tailscale.package = pkgs.tailscale-wrapped;
 
     boot.initrd.kernelModules = [ "tun" ];
     boot.initrd.availableKernelModules = [

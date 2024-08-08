@@ -5,7 +5,7 @@
 # may eventually expand to configure everything related to user accounts
 with lib;
 {
-  options.yomaq.primaryUser = {
+  options.cpritchett.primaryUser = {
     users = mkOption {
       type = types.listOf types.str;
       default = [ "admin" ];

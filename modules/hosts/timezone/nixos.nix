@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.yomaq.timezone;
+  cfg = config.cpritchett.timezone;
 in
 {
-  options.yomaq.timezone = {
+  options.cpritchett.timezone = {
     central = mkOption {
       type = types.bool;
       default = false;

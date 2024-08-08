@@ -2,13 +2,13 @@
 
 with lib;
 let
-  cfg = config.yomaq.suites.basics;
+  cfg = config.cpritchett.suites.basics;
 in
 {
   imports = [
   ];
   config = mkIf cfg.enable {
-    yomaq = {
+    cpritchett = {
       skhd.enable = true;
     };
   };

@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 with lib;
 let
-  cfg = config.yomaq.zsh;
+  cfg = config.cpritchett.zsh;
 in
 {
  config = lib.mkIf cfg.enable {

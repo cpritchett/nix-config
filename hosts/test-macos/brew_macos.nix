@@ -4,13 +4,6 @@
 #Some programs don't have nix packages available, so making use of Homebrew is needed, sadly there is also no way of installing home brew through nix
     homebrew = {
       casks = [
-        "moonlight"
-        "raycast"
-        "arc"
-        "linearmouse"
-        "altserver"
-        "spotify"
-        "nextcloud"
         "brave-browser"
       ];
       taps = ["pulumi/tap"];
@@ -23,13 +16,13 @@
 #User specific settings, eventually plan to create the user account itself through Nix as well
     users = {
       users = {
-        carln = {
+        cpritchett = {
           home = {
             _type = "override";
-            content = /Users/carln;
+            content = /Users/cpritchett;
             priority = 50;
           };
-          name = "carln";
+          name = "cpritchett";
           shell = pkgs.zsh;
         };
       };

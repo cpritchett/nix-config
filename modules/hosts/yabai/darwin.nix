@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.yomaq.yabai;
+  cfg = config.cpritchett.yabai;
 in
 {
-  options.yomaq.yabai = {
+  options.cpritchett.yabai = {
     enable = mkOption {
       type = types.bool;
       default = false;

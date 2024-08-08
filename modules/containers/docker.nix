@@ -2,10 +2,10 @@
 with lib;
 
 let
-  cfg = config.yomaq.docker;
+  cfg = config.cpritchett.docker;
 
 in {
-  options.yomaq.docker = {
+  options.cpritchett.docker = {
     enable = mkOption {
       description = "Enable docker";
       type = types.bool;
@@ -26,7 +26,7 @@ in {
         extraOptions = "--dns 9.9.9.9";
       };
     };
-    environment.persistence."${config.yomaq.impermanence.dontBackup}" = {
+    environment.persistence."${config.cpritchett.impermanence.dontBackup}" = {
       directories = [
         "/var/lib/containers/storage"
       ];

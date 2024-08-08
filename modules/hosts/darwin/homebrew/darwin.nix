@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.yomaq.homebrew;
+  cfg = config.cpritchett.homebrew;
 in
 {
-  options.yomaq.homebrew = {
+  options.cpritchett.homebrew = {
     enable  = mkOption {
       type = types.bool;
       default = false;

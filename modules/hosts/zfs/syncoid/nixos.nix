@@ -1,12 +1,12 @@
 { options, config, lib, pkgs, inputs, ... }:
 let
-  cfg = config.yomaq.syncoid;
+  cfg = config.cpritchett.syncoid;
   thisHost =  config.networking.hostName;
   allNixosHosts = lib.attrNames inputs.self.nixosConfigurations;
   nixosHosts = lib.lists.subtractLists (cfg.exclude ++ [thisHost]) (allNixosHosts ++ cfg.additionalClients);
 in
 {
-  options.yomaq.syncoid = {
+  options.cpritchett.syncoid = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;
@@ -44,7 +44,7 @@ in
     };
   };
   config = lib.mkMerge [
-    (lib.mkIf config.yomaq.syncoid.enable {
+    (lib.mkIf config.cpritchett.syncoid.enable {
       services.syncoid.enable = true;
       # I believe I need to create the login shell as I am not using the default method of enabling ssh for the user (using tailscale ssh auth instead)
       users.users.syncoid.shell = pkgs.bash;
@@ -58,7 +58,7 @@ in
       # # wipe zfs allow permissions
       # systemd.services.syncoid-zfs-unallow 
     })
-    (lib.mkIf config.yomaq.syncoid.isBackupServer {
+    (lib.mkIf config.cpritchett.syncoid.isBackupServer {
       services.syncoid = {
         enable = true;
         interval = "daily";
@@ -80,7 +80,7 @@ in
         };
       };
     })    
-    {services.syncoid = lib.mkIf config.yomaq.syncoid.isBackupServer (lib.mkMerge (map ( hostName: {
+    {services.syncoid = lib.mkIf config.cpritchett.syncoid.isBackupServer (lib.mkMerge (map ( hostName: {
         commands = {
           "${hostName}Save" = {
           source = "syncoid@${hostName}:zroot/persistSave";
@@ -89,7 +89,7 @@ in
           };
         };
       })nixosHosts));
-      services.sanoid = lib.mkIf config.yomaq.syncoid.isBackupServer (lib.mkMerge (map ( hostName: {
+      services.sanoid = lib.mkIf config.cpritchett.syncoid.isBackupServer (lib.mkMerge (map ( hostName: {
         datasets."zstorage/backups/${hostName}" = {
             autosnap = false;
             autoprune = true;
@@ -101,12 +101,12 @@ in
       })nixosHosts));
 
       # syncoid-fail service for all nixosHosts
-      systemd.services = lib.mkIf config.yomaq.syncoid.isBackupServer  (lib.mkMerge (map (hostName: {
+      systemd.services = lib.mkIf config.cpritchett.syncoid.isBackupServer  (lib.mkMerge (map (hostName: {
         "syncoid-${hostName}Save" = {
           onSuccess = ["syncoid-success-${hostName}.service"];
         };
         "syncoid-success-${hostName}" = {
-          script = ''${lib.getExe pkgs.curl} -fsS -m 10 --retry 5 ${config.yomaq.healthcheckUrl.syncoid."${hostName}"}'';
+          script = ''${lib.getExe pkgs.curl} -fsS -m 10 --retry 5 ${config.cpritchett.healthcheckUrl.syncoid."${hostName}"}'';
         };
       })(nixosHosts ++ [config.networking.hostName])));
 

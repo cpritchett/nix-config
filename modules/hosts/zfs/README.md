@@ -21,4 +21,4 @@ Currently the only way to exclude a nixOS host listed in the nixos configuration
 
 
 # TODO 
-currently yomaq.syncoid.enable and yomaq.sanoid.enable is enabled by default on all hosts in the syncoid and sanoid modules, when I change from using common modules to using suites, this should move to a suite and should be disabled by default here.
+currently cpritchett.syncoid.enable and cpritchett.sanoid.enable is enabled by default on all hosts in the syncoid and sanoid modules, when I change from using common modules to using suites, this should move to a suite and should be disabled by default here.

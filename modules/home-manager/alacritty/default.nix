@@ -1,10 +1,10 @@
 { options, config, lib, pkgs, inputs, ... }:
 let
-  cfg = config.yomaq.alacritty;
+  cfg = config.cpritchett.alacritty;
 in
 {
   imports = [];
-  options.yomaq.alacritty = {
+  options.cpritchett.alacritty = {
     enable = with lib; mkOption {
       type = types.bool;
       default = false;

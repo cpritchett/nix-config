@@ -1,7 +1,7 @@
 { pkgs, lib, ... }: 
 { 
   env = {
-    GREET = "Yomaq's Home Flake";
+    GREET = "cpritchett's Home Flake";
   };
 
   # https://github.com/cachix/devenv/issues/528
@@ -28,9 +28,9 @@
     # update nixos or nix-darwin from github
     yo-rb.exec = ''
       if [[ "$OSTYPE" == "darwin"* ]]; then \
-          darwin-rebuild switch --flake github:yomaq/nix-config ;\
+          darwin-rebuild switch --flake github:cpritchett/nix-config ;\
       elif [[ "$OSTYPE" == "linux-gnu"* ]]; then \
-          sudo nixos-rebuild switch --option eval-cache false --flake github:yomaq/nix-config ;\
+          sudo nixos-rebuild switch --option eval-cache false --flake github:cpritchett/nix-config ;\
       else \
           echo "Unsupported OS" ;\
           exit 1 ;\
@@ -54,7 +54,7 @@
           exit 1
       fi
       HOSTNAME=$1
-      nixos-rebuild --use-substitutes --no-build-nix --build-host admin@$HOSTNAME --target-host admin@$HOSTNAME --use-remote-sudo switch --flake github:yomaq/nix-config#$HOSTNAME
+      nixos-rebuild --use-substitutes --no-build-nix --build-host admin@$HOSTNAME --target-host admin@$HOSTNAME --use-remote-sudo switch --flake github:cpritchett/nix-config#$HOSTNAME
     '';
     # update nixos on a remote machine using local flake
     yo-rbrl.exec = ''

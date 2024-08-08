@@ -2,11 +2,11 @@
 
 with lib;
 let
-  cfg = config.yomaq.suites.basics;
+  cfg = config.cpritchett.suites.basics;
 in
 {
   config = mkIf cfg.enable {
-    yomaq = {
+    cpritchett = {
       glances.enable = true;
     };
   };

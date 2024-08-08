@@ -7,14 +7,14 @@ let
  IMAGE = "docker.io/semaphoreui/semaphore";
  DBIMAGE = "docker.io/mysql";
 
- cfg = config.yomaq.pods.${NAME};
+ cfg = config.cpritchett.pods.${NAME};
  inherit (config.networking) hostName;
- inherit (config.yomaq.impermanence) backup;
- inherit (config.yomaq.tailscale) tailnetName;
+ inherit (config.cpritchett.impermanence) backup;
+ inherit (config.cpritchett.tailscale) tailnetName;
 
 in
 {
- options.yomaq.pods.${NAME} = {
+ options.cpritchett.pods.${NAME} = {
     enable = mkOption {
       type = types.bool;
       default = false;
@@ -115,12 +115,12 @@ in
       };
     };
 
-    yomaq.pods.tailscaled."TS${NAME}" = {
+    cpritchett.pods.tailscaled."TS${NAME}" = {
       TSserve = {"/" = "http://127.0.0.1:3000";};
       tags = ["tag:generichttps"];
     };
 
-    yomaq.homepage.groups.services.services = [{
+    cpritchett.homepage.groups.services.services = [{
       "${NAME}" = {
         icon = "si-ansible";
         href = "https://${hostName}-${NAME}.${tailnetName}.ts.net";

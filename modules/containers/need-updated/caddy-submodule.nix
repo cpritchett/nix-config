@@ -13,10 +13,10 @@ let
   NAME = "caddy";
   IMAGE = "docker.io/caddy";
 
-  cfg = config.yomaq.pods.tailscaled;
+  cfg = config.cpritchett.pods.tailscaled;
   inherit (config.networking) hostName;
-  inherit (config.yomaq.impermanence) dontBackup;
-  inherit (config.yomaq.tailscale) tailnetName;
+  inherit (config.cpritchett.impermanence) dontBackup;
+  inherit (config.cpritchett.tailscale) tailnetName;
 
   containerOpts = { name, config, ... }: 
     let
@@ -97,7 +97,7 @@ let
   ];
 in
 {
-  options.yomaq.pods = {
+  options.cpritchett.pods = {
     "${NAME}" = mkOption {
       default = {};
       type = with types; attrsOf (submodule containerOpts);
@@ -109,7 +109,7 @@ in
   };
   config = mkIf (cfg != {}) {
 
-    systemd.tmpfiles.rules = lib.flatten ( lib.mapAttrsToList (name: cfg: mkTmpfilesRules name cfg) config.yomaq.pods."${NAME}");
-    virtualisation.oci-containers.containers = lib.mapAttrs mkContainer config.yomaq.pods."${NAME}";
+    systemd.tmpfiles.rules = lib.flatten ( lib.mapAttrsToList (name: cfg: mkTmpfilesRules name cfg) config.cpritchett.pods."${NAME}");
+    virtualisation.oci-containers.containers = lib.mapAttrs mkContainer config.cpritchett.pods."${NAME}";
   };
 }

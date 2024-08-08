@@ -1,13 +1,13 @@
 { config, lib, pkgs, modulesPath, inputs, ... }:
 let
-  inherit (config.yomaq.impermanence) dontBackup;
+  inherit (config.cpritchett.impermanence) dontBackup;
 in
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
   ];
 
-  yomaq.ssh.enable = true;
+  cpritchett.ssh.enable = true;
   # Force all user accounts to require nix configuration, any manual changes to users will be lost
   users.mutableUsers = false;
   # Configure admin account
@@ -18,7 +18,7 @@ in
     hashedPassword = null;
     # Set authorized keys to authenticate to ssh as admin user
     openssh.authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHYSJ9ywFRJ747tkhvYWFkx/Y9SkLqv3rb7T1UuXVBWo"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIdiGvAMHgg9QXeOceSRWJLJ7Kx8KFpptbjloZijPpaa"
         ];
     shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" ];

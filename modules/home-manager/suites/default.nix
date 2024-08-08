@@ -1,10 +1,10 @@
 { options, config, lib, pkgs, inputs, ... }:
 let
-  cfg = config.yomaq.suites.basic;
+  cfg = config.cpritchett.suites.basic;
 in
 {
   imports = [];
-  options.yomaq.suites.basic = {
+  options.cpritchett.suites.basic = {
     enable = with lib; mkOption {
       type = types.bool;
       default = false;
@@ -14,7 +14,7 @@ in
     };
   };
  config = lib.mkIf cfg.enable {
-    yomaq = {
+    cpritchett = {
       comma.enable = true;
       bash.enable = true;
       tmux.enable = true;

@@ -2,11 +2,11 @@
 
 with lib;
 let
-  cfg = config.yomaq.ssh;
+  cfg = config.cpritchett.ssh;
   inherit (config.networking) hostName;
 in
 {
-  options.yomaq.ssh = {
+  options.cpritchett.ssh = {
     enable = mkOption {
       type = types.bool;
       default = false;

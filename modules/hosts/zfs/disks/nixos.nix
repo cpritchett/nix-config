@@ -4,12 +4,12 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDF1TFwXbqdC1UyG75q3HO1n7/L3yxpeRLIq2kQ9DalI" 
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHYSJ9ywFRJ747tkhvYWFkx/Y9SkLqv3rb7T1UuXVBWo"
   ];
-  cfg = config.yomaq.disks;
+  cfg = config.cpritchett.disks;
   inherit (config.networking) hostName;
-  inherit (config.yomaq.impermanence) dontBackup;
+  inherit (config.cpritchett.impermanence) dontBackup;
 in
 {
-  options.yomaq.disks = {
+  options.cpritchett.disks = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;
@@ -392,7 +392,7 @@ in
                   "com.sun:auto-snapshot" = "false";
                 };
               };
-              backups = lib.mkIf config.yomaq.syncoid.isBackupServer {
+              backups = lib.mkIf config.cpritchett.syncoid.isBackupServer {
                 type = "zfs_fs";
                 mountpoint = "/backups";
                 options = {

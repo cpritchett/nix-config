@@ -4,10 +4,10 @@
 
 with lib;
 let
-  cfg = config.yomaq.tailscale;
+  cfg = config.cpritchett.tailscale;
 in
 {
-  options.yomaq.tailscale = {
+  options.cpritchett.tailscale = {
     enable = mkOption {
       type = types.bool;
       default = false;

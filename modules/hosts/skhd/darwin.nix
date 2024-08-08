@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.yomaq.skhd;
+  cfg = config.cpritchett.skhd;
 in
 {
-  options.yomaq.skhd = {
+  options.cpritchett.skhd = {
     enable = mkOption {
       type = types.bool;
       default = false;

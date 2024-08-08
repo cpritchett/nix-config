@@ -6,11 +6,11 @@ let
   NAME = "windows";
   IMAGE = "docker.io/dockurr/windows";
 
-  cfg = config.yomaq.pods.windows;
+  cfg = config.cpritchett.pods.windows;
   inherit (config.networking) hostName;
-  inherit (config.yomaq.impermanence) backup;
-  inherit (config.yomaq.impermanence) dontBackup;
-  inherit (config.yomaq.tailscale) tailnetName;
+  inherit (config.cpritchett.impermanence) backup;
+  inherit (config.cpritchett.impermanence) dontBackup;
+  inherit (config.cpritchett.tailscale) tailnetName;
 
 
   containerOpts = { name, config, ... }:
@@ -92,7 +92,7 @@ let
   # }];
 in
 {
-  options.yomaq.pods = {
+  options.cpritchett.pods = {
     windows = mkOption {
       default = {};
       type = with types; attrsOf (submodule containerOpts);
@@ -103,10 +103,10 @@ in
     };
   };
   config = mkIf (cfg != {}) {
-    yomaq.pods.tailscaled = lib.genAttrs renameTScontainers (container: { tags = ["tag:windowsindocker"]; TSserve =  {"/" = "http://127.0.0.1:8006";};});
+    cpritchett.pods.tailscaled = lib.genAttrs renameTScontainers (container: { tags = ["tag:windowsindocker"]; TSserve =  {"/" = "http://127.0.0.1:8006";};});
     systemd.tmpfiles.rules = lib.flatten ( lib.mapAttrsToList (name: cfg: mkTmpfilesRules name cfg) cfg);
     virtualisation.oci-containers.containers = lib.mapAttrs mkContainer cfg;
-    # yomaq.homepage.services = [{minecraft = lib.flatten (map homepageServices containersList);}];
-    # yomaq.homepage.settings.layout.minecraft.tab = "Services";
+    # cpritchett.homepage.services = [{minecraft = lib.flatten (map homepageServices containersList);}];
+    # cpritchett.homepage.settings.layout.minecraft.tab = "Services";
   };
 }

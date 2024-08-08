@@ -1,31 +1,33 @@
 { config, lib, pkgs, modulesPath, inputs, ... }:
 let
-  inherit (config.yomaq.impermanence) dontBackup;
+  inherit (config.cpritchett.impermanence) dontBackup;
 in
 {
   imports =
     [
       inputs.home-manager.nixosModules.home-manager
     ];
-  age.secrets.ryn.file = (inputs.self + /secrets/ryn.age);
+  age.secrets.cpritchett.file = (inputs.self + /secrets/cpritchett.age);
 
   users.mutableUsers = false;
 
-  users.users.ryn = {
+  users.users.cpritchett = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    description = "ryn";
-    hashedPasswordFile = config.age.secrets.ryn.path;
-    extraGroups = [];
-    openssh.authorizedKeys.keys = [];
+    description = "cpritchett";
+    hashedPasswordFile = config.age.secrets.cpritchett.path;
+    extraGroups = [ "networkmanager" "wheel" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEApFR9UNrE2s+i/G/VPncNcR6y0bXzIpsNR2JlcASA9"
+      ];
     packages = with pkgs; [];
   };
 
   environment.persistence."${dontBackup}" = {
-    users.ryn = {
+    users.cpritchett = {
       directories = [
+        "nix"
         "documents"
-        "desktop"
         ".var"
         ".config"
         ".local"
@@ -39,7 +41,7 @@ in
     extraSpecialArgs = { inherit inputs; };
     users = {
       # Import your home-manager configuration
-      ryn = import ./homeManager;
+      cpritchett = import ./homeManager;
     };
   };
 }

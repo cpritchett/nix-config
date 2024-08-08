@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.yomaq.nixSettings;
+  cfg = config.cpritchett.nixSettings;
 in
 {
-  options.yomaq.nixSettings = {
+  options.cpritchett.nixSettings = {
     enable = mkOption {
       type = types.bool;
       default = false;

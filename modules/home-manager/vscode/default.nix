@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.yomaq.vscode;
+  cfg = config.cpritchett.vscode;
 in
 {
-  options.yomaq.vscode = {
+  options.cpritchett.vscode = {
     enable = mkOption {
       type = types.bool;
       default = false;

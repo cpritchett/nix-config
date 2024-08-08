@@ -6,10 +6,10 @@ let
   NAME = "homepage";
   IMAGE = "ghcr.io/gethomepage/homepage";
 
-  cfg = config.yomaq.pods.${NAME};
+  cfg = config.cpritchett.pods.${NAME};
   inherit (config.networking) hostName;
-  inherit (config.yomaq.impermanence) backup;
-  inherit (config.yomaq.impermanence) dontBackup;
+  inherit (config.cpritchett.impermanence) backup;
+  inherit (config.cpritchett.impermanence) dontBackup;
 
 
   settings = {
@@ -31,7 +31,7 @@ let
 
 in
 {
-  options.yomaq.pods.${NAME} = {
+  options.cpritchett.pods.${NAME} = {
     enable = mkOption {
       type = types.bool;
       default = false;
@@ -96,6 +96,6 @@ in
         # user = "4000:4000";
       };
     };
-    yomaq.pods.tailscaled."TS${NAME}".TSserve =  {"/" = "http://127.0.0.1:3000";};
+    cpritchett.pods.tailscaled."TS${NAME}".TSserve =  {"/" = "http://127.0.0.1:3000";};
   };
 }

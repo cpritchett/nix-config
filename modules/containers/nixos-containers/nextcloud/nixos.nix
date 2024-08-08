@@ -3,18 +3,18 @@ let
 
   NAME = "nextcloud";
 
-  cfg = config.yomaq.nixos-containers."${NAME}";
+  cfg = config.cpritchett.nixos-containers."${NAME}";
 
   inherit (config.networking) hostName;
-  inherit (config.yomaq.impermanence) backup;
-  inherit (config.yomaq.impermanence) dontBackup;
-  inherit (config.yomaq.impermanence) backupStorage;
-  inherit (config.yomaq.tailscale) tailnetName;
+  inherit (config.cpritchett.impermanence) backup;
+  inherit (config.cpritchett.impermanence) dontBackup;
+  inherit (config.cpritchett.impermanence) backupStorage;
+  inherit (config.cpritchett.tailscale) tailnetName;
   inherit (config.system) stateVersion;
 
 in
 {
-  options.yomaq.nixos-containers."${NAME}" = {
+  options.cpritchett.nixos-containers."${NAME}" = {
     enable = lib.mkEnableOption (lib.mdDoc "${NAME} Server");
     storage = lib.mkOption {
       description = "persistent file location";
@@ -31,7 +31,7 @@ in
       "d ${cfg.storage}/nixos-containers/${NAME}/db"
     ];
 
-    yomaq.homepage.groups.services.services = [{
+    cpritchett.homepage.groups.services.services = [{
       "Nextcloud" = {
         icon = "si-nextcloud";
         href = "https://${hostName}-${NAME}.${tailnetName}.ts.net";
@@ -40,7 +40,7 @@ in
     }];
 
 
-    yomaq.gatus.endpoints = [{
+    cpritchett.gatus.endpoints = [{
       name = "${hostName}-${NAME}";
       group = "webapps";
       url = "https://${hostName}-${NAME}.${tailnetName}.ts.net/";
@@ -58,7 +58,7 @@ in
     }];
 
     #will still need to set the network device name manually
-    yomaq.network.useBr0 = true;
+    cpritchett.network.useBr0 = true;
 
     containers."${hostName}-${NAME}" = {
       autoStart = true;
@@ -87,13 +87,13 @@ in
       ephemeral = true;
       config = {
         imports = [
-          inputs.self.nixosModules.yomaq
+          inputs.self.nixosModules.cpritchett
           (inputs.self + /users/admin)
           ];
         system.stateVersion = stateVersion;
         age.identityPaths = ["/etc/ssh/${hostName}"];
 
-        yomaq = {
+        cpritchett = {
           tailscale.extraUpFlags = ["--ssh=true" "--reset=true"];
           suites.container.enable = true;
         };
@@ -136,7 +136,7 @@ in
           appstoreEnable = true;
           config = {
             dbtype = "mysql";
-            adminuser = "yomaq";
+            adminuser = "cpritchett";
           };
         };
       };
@@ -154,6 +154,6 @@ in
           "--network=container:TScollaboraCode"
       ];
     };
-    yomaq.pods.tailscaled."TScollaboraCode".enable = true;
+    cpritchett.pods.tailscaled."TScollaboraCode".enable = true;
   };
 }

@@ -1,9 +1,9 @@
 { options, config, lib, pkgs, inputs, ... }:
 let
-  cfg = config.yomaq.sanoid;
+  cfg = config.cpritchett.sanoid;
 in
 {
-  options.yomaq.sanoid = {
+  options.cpritchett.sanoid = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = true;
@@ -29,7 +29,7 @@ in
       datasets = {
         "zroot/persist".useTemplate = [ "default" ];
         "zroot/persistSave".useTemplate = [ "default" ];
-      } // lib.optionalAttrs (config.yomaq.disks.zfs.storage.enable && !config.yomaq.disks.amReinstalling) {
+      } // lib.optionalAttrs (config.cpritchett.disks.zfs.storage.enable && !config.cpritchett.disks.amReinstalling) {
         "zstorage/storage".useTemplate = [ "default" ];
         "zstorage/persistSave".useTemplate = [ "default" ];
       };

@@ -108,10 +108,10 @@
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#your-username@your-hostname'
       homeConfigurations = {
-        "carln@hostname" = home-manager.lib.homeManagerConfiguration {
+        "cpritchett@hostname" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {inherit inputs;};
-          modules = [./users/carln/homeManager];
+          modules = [./users/cpritchett/homeManager];
         };
       };
       # Nixos-generators configuration entrypoints
@@ -127,15 +127,15 @@
       };
   ### Module outputs
       nixosModules = {
-        yomaq = import ./modules/hosts/nixos.nix;
+        cpritchett = import ./modules/hosts/nixos.nix;
         # custom container modules
         pods = import ./modules/containers;
       };
       darwinModules = {
-        yomaq = import ./modules/hosts/darwin.nix;
+        cpritchett = import ./modules/hosts/darwin.nix;
       };
       homeManagerModules = {
-        yomaq = import ./modules/home-manager;
+        cpritchett = import ./modules/home-manager;
       };
     };
   };

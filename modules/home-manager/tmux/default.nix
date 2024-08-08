@@ -1,10 +1,10 @@
 { options, config, lib, pkgs, inputs, ... }:
 let
-  cfg = config.yomaq.tmux;
+  cfg = config.cpritchett.tmux;
 in
 {
   imports = [];
-  options.yomaq.tmux = {
+  options.cpritchett.tmux = {
     enable = with lib; mkOption {
       type = types.bool;
       default = false;

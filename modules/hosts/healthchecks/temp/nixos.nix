@@ -4,8 +4,8 @@ with lib;
 
 let
   defaultUser = "healthchecks";
-  cfg = config.yomaq.healthchecks;
-  opt = options.yomaq.healthchecks;
+  cfg = config.cpritchett.healthchecks;
+  opt = options.cpritchett.healthchecks;
   pkg = cfg.package;
   boolToPython = b: if b then "True" else "False";
   environment = {
@@ -26,7 +26,7 @@ let
   '';
 in
 {
-  options.yomaq.healthchecks = {
+  options.cpritchett.healthchecks = {
     enable = mkEnableOption "healthchecks" // {
       description = ''
         Enable healthchecks.

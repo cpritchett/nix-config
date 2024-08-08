@@ -1,10 +1,10 @@
 { options, config, lib, pkgs, inputs, ... }:
 let
-  cfg = config.yomaq.direnv;
+  cfg = config.cpritchett.direnv;
 in
 {
   imports = [];
-  options.yomaq.direnv = {
+  options.cpritchett.direnv = {
     enable = with lib; mkOption {
       type = types.bool;
       default = false;

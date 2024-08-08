@@ -2,7 +2,7 @@
 {
   imports =[
     # import users
-      inputs.self.nixosModules.yomaq
+      inputs.self.nixosModules.cpritchett
   ];
   config = {
     networking.hostName = "nixos-install";
@@ -13,7 +13,7 @@
       rsync
     ];
     networking.wireless.enable = lib.mkForce false;
-    yomaq = {
+    cpritchett = {
       tailscale = {
         enable = true;
         extraUpFlags = ["--reset=true" ];

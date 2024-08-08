@@ -12,7 +12,7 @@ Attempting to view the Flake and its nixos hosts as a single logical unit, rathe
 * Programmatically configured uptime monitoring with [Gatus](https://github.com/TwiN/gatus), no matter which host a new service is deployed on, the Gatus server will automatically update its configuration to include the new service - Homepage dashboard also does the same with links to all current services automatically.
 * Programmatically configured notifications and monitoring for failed Nixos updates and zfs backups, server and service downtime etc with [Ntfy](https://github.com/binwiederhier/ntfy) and [Gatus](https://github.com/TwiN/gatus).
 * Detailed Tailscale modules for general VPN access, initrd ssh access, docker and nixos container configuration etc.
-* All Flake networking is heavily reliant on Tailscale, meaning automatic HTTPS certificates for all services, automatic DNS records, controlled Zero Trust access between all devices, no open ports required on any device. Additionally, no reliance on LAN for networking, so I can move any server to any network without any additional configuration required. Tailscale ACL is configured with Pulumi [here](https://github.com/yomaq/Tailscale-ACL).
+* All Flake networking is heavily reliant on Tailscale, meaning automatic HTTPS certificates for all services, automatic DNS records, controlled Zero Trust access between all devices, no open ports required on any device. Additionally, no reliance on LAN for networking, so I can move any server to any network without any additional configuration required. Tailscale ACL is configured with Pulumi [here](https://github.com/cpritchett/Tailscale-ACL).
 
 ### Installation and Updates
 
@@ -51,7 +51,7 @@ Using the git revision of the flake, you can easily see which hosts are out of d
 
 **Update the system(rebuild)**:  
 ```
-nixos-rebuild switch --flake github:yomaq/nix-config
+nixos-rebuild switch --flake github:cpritchett/nix-config
 ```
 </details>
 
@@ -84,7 +84,7 @@ Install Homebrew: https://docs.brew.sh/Installation
 ```
 Get the flake
 ```
-git clone https://github.com/yomaq/nix-config.git
+git clone https://github.com/cpritchett/nix-config.git
 cd nix-config
 ```
 Remove the old nix.conf 
@@ -103,7 +103,7 @@ darwin-rebuild switch --flake .
 ```
 Or to build without cloning
 ```
-darwin-rebuild switch --flake github:yomaq/nix-config
+darwin-rebuild switch --flake github:cpritchett/nix-config
 ```
 </details>
 

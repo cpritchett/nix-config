@@ -1,6 +1,6 @@
 { inputs, lib, config, pkgs, ... }: {
   imports = [
-    inputs.self.homeManagerModules.yomaq
+    inputs.self.homeManagerModules.cpritchett
     # inputs.nix-index-database.hmModules.nix-index
     ./dotfiles
     ];
@@ -27,7 +27,6 @@
     pkgs.nextcloud-client
     #pkgs.spotify
     pkgs.steam
-    pkgs.brave
     #screenshare x11 apps on wayland
     pkgs.xwaylandvideobridge
     # pkgs.obsidian
@@ -35,11 +34,11 @@
   programs = {
     git = {
       enable = true;
-      userEmail = "yomaq@bsjm.xyz";
-      userName = "yomaq";
+      userEmail = "chad@chadpritchett.com";
+      userName = "cpritchett";
     };
   };
-  yomaq = {
+  cpritchett = {
     suites.basic.enable = true;
     gnomeOptions.enable = true;
     vscode.enable = true;

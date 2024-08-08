@@ -2,12 +2,12 @@
 
 with lib;
 let
-  cfg = config.yomaq.suites.basics;
+  cfg = config.cpritchett.suites.basics;
 in
 {
   imports = [
   ];
-  options.yomaq.suites.basics = {
+  options.cpritchett.suites.basics = {
     enable = mkOption {
       type = types.bool;
       default = false;

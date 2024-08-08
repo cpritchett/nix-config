@@ -6,10 +6,10 @@ let
   NAME = "minecraftBedrock";
   IMAGE = "docker.io/itzg/minecraft-bedrock-server";
 
-  cfg = config.yomaq.pods.minecraftBedrock;
+  cfg = config.cpritchett.pods.minecraftBedrock;
   inherit (config.networking) hostName;
-  inherit (config.yomaq.impermanence) backup;
-  inherit (config.yomaq.tailscale) tailnetName;
+  inherit (config.cpritchett.impermanence) backup;
+  inherit (config.cpritchett.tailscale) tailnetName;
 
 
   containerOpts = { name, config, ... }: 
@@ -99,7 +99,7 @@ let
   }];
 in
 {
-  options.yomaq.pods = {
+  options.cpritchett.pods = {
     minecraftBedrock = mkOption {
       default = {};
       type = with types; attrsOf (submodule containerOpts);
@@ -110,11 +110,11 @@ in
     };
   };
   config = mkIf (cfg != {}) {
-    yomaq.pods.tailscaled = lib.genAttrs renameTScontainers (container: { tags = ["tag:minecraft"]; });
-    systemd.tmpfiles.rules = lib.flatten ( lib.mapAttrsToList (name: cfg: mkTmpfilesRules name cfg) config.yomaq.pods.minecraftBedrock);
-    virtualisation.oci-containers.containers = lib.mapAttrs mkContainer config.yomaq.pods.minecraftBedrock;
-    # yomaq.homepage.widgets = lib.flatten (map homepageWidgets containersList);
-    yomaq.homepage.services = [{minecraft = lib.flatten (map homepageServices containersList);}];
-    yomaq.homepage.settings.layout.minecraft.tab = "Services";
+    cpritchett.pods.tailscaled = lib.genAttrs renameTScontainers (container: { tags = ["tag:minecraft"]; });
+    systemd.tmpfiles.rules = lib.flatten ( lib.mapAttrsToList (name: cfg: mkTmpfilesRules name cfg) config.cpritchett.pods.minecraftBedrock);
+    virtualisation.oci-containers.containers = lib.mapAttrs mkContainer config.cpritchett.pods.minecraftBedrock;
+    # cpritchett.homepage.widgets = lib.flatten (map homepageWidgets containersList);
+    cpritchett.homepage.services = [{minecraft = lib.flatten (map homepageServices containersList);}];
+    cpritchett.homepage.settings.layout.minecraft.tab = "Services";
   };
 }

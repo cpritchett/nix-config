@@ -8,14 +8,14 @@ let
   tailscaleIMAGE = "ghcr.io/tailscale/tailscale";
 
 
-  cfg = config.yomaq.pods.${NAME};
+  cfg = config.cpritchett.pods.${NAME};
   inherit (config.networking) hostName;
-  inherit (config.yomaq.impermanence) backup;
-  inherit (config.yomaq.impermanence) dontBackup;
+  inherit (config.cpritchett.impermanence) backup;
+  inherit (config.cpritchett.impermanence) dontBackup;
 
 in
 {
-  options.yomaq.pods.${NAME} = {
+  options.cpritchett.pods.${NAME} = {
     enable = mkOption {
       type = types.bool;
       default = false;

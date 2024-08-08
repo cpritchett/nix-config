@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.yomaq.macosSettings;
+  cfg = config.cpritchett.macosSettings;
 in
 {
-  options.yomaq.macosSettings = {
+  options.cpritchett.macosSettings = {
     enable  = mkOption {
       type = types.bool;
       default = false;

@@ -37,9 +37,9 @@
 # # update nixos or nix-darwin from github
 # rb:
 #     if [[ "$OSTYPE" == "darwin"* ]]; then \
-#         darwin-rebuild switch --flake github:yomaq/nix-config ;\
+#         darwin-rebuild switch --flake github:cpritchett/nix-config ;\
 #     elif [[ "$OSTYPE" == "linux-gnu"* ]]; then \
-#         sudo nixos-rebuild switch --option eval-cache false --flake github:yomaq/nix-config ;\
+#         sudo nixos-rebuild switch --option eval-cache false --flake github:cpritchett/nix-config ;\
 #     else \
 #         echo "Unsupported OS" ;\
 #         exit 1 ;\
@@ -58,7 +58,7 @@
 
 # # update nixos on a remote machine
 # rbr host:
-#     nixos-rebuild  --use-substitutes --no-build-nix --build-host admin@{{host}} --target-host admin@{{host}} --use-remote-sudo switch --flake github:yomaq/nix-config#{{host}}
+#     nixos-rebuild  --use-substitutes --no-build-nix --build-host admin@{{host}} --target-host admin@{{host}} --use-remote-sudo switch --flake github:cpritchett/nix-config#{{host}}
 # # update nixos on a remote machine using local flake
 # rbrl host:
 #     nixos-rebuild  --use-substitutes --no-build-nix --build-host admin@{{host}} --target-host admin@{{host}} --use-remote-sudo switch --flake .#{{host}}

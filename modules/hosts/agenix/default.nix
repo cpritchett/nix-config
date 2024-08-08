@@ -1,10 +1,10 @@
 { options, config, lib, pkgs, inputs, ... }:
 with lib;
 let
-  cfg = config.yomaq.agenix;
+  cfg = config.cpritchett.agenix;
 in
 {
-  options.yomaq.agenix = {
+  options.cpritchett.agenix = {
     enable = mkOption {
       type = types.bool;
       default = false;

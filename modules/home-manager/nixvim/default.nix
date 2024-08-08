@@ -1,12 +1,12 @@
 { options, config, lib, pkgs, inputs, ... }:
 let
-  cfg = config.yomaq.nixvim;
+  cfg = config.cpritchett.nixvim;
 in
 {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
   ];
-  options.yomaq.nixvim = {
+  options.cpritchett.nixvim = {
     enable = with lib; mkOption {
       type = types.bool;
       default = false;

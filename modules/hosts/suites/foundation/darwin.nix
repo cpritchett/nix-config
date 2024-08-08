@@ -2,11 +2,11 @@
 
 with lib;
 let
-  cfg = config.yomaq.suites.foundation;
+  cfg = config.cpritchett.suites.foundation;
 in
 {
   config = mkIf cfg.enable {
-    yomaq = {
+    cpritchett = {
       macosSettings.enable = true;
       homebrew.enable = true;
     };

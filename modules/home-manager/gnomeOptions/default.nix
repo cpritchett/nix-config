@@ -24,10 +24,10 @@
 
 with lib;
 let
-  cfg = config.yomaq.gnomeOptions;
+  cfg = config.cpritchett.gnomeOptions;
 in
 {
-  options.yomaq.gnomeOptions = {
+  options.cpritchett.gnomeOptions = {
     enable = mkOption {
       type = types.bool;
       default = false;

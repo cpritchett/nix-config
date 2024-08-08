@@ -9,14 +9,14 @@ let
   dbIMAGE = "docker.io/postgres";
 
 
-  cfg = config.yomaq.pods.${NAME};
+  cfg = config.cpritchett.pods.${NAME};
   inherit (config.networking) hostName;
-  inherit (config.yomaq.impermanence) backup;
-  inherit (config.yomaq.impermanence) dontBackup;
-  inherit (config.yomaq.tailscale) tailnetName;
+  inherit (config.cpritchett.impermanence) backup;
+  inherit (config.cpritchett.impermanence) dontBackup;
+  inherit (config.cpritchett.tailscale) tailnetName;
 in
 {
-  options.yomaq.pods.${NAME} = {
+  options.cpritchett.pods.${NAME} = {
     enable = mkOption {
       type = types.bool;
       default = false;
@@ -126,13 +126,13 @@ in
         ];
       };
     };
-    yomaq.pods.tailscaled."TS${NAME}" = {
+    cpritchett.pods.tailscaled."TS${NAME}" = {
       TSserve = {
         "/" = "http://127.0.0.1:3000";
       };
       tags = ["tag:generichttps"];
     };
-    yomaq.homepage.groups.services.services = [{
+    cpritchett.homepage.groups.services.services = [{
       "${NAME}" = {
         icon = "mdi-bookmark-box";
         href = "https://${hostName}-${NAME}.${tailnetName}.ts.net";
@@ -140,7 +140,7 @@ in
       };
     }];
 
-    yomaq.gatus.endpoints = [{
+    cpritchett.gatus.endpoints = [{
       name = "${hostName}-${NAME}";
       group = "webapps";
       url = "https://${hostName}-${NAME}.${tailnetName}.ts.net/";

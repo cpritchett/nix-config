@@ -3,16 +3,16 @@ let
 
   NAME = "gatus";
 
-  cfg = config.yomaq.nixos-containers."${NAME}";
+  cfg = config.cpritchett.nixos-containers."${NAME}";
 
   inherit (config.networking) hostName;
-  inherit (config.yomaq.impermanence) backup;
-  inherit (config.yomaq.impermanence) dontBackup;
-  inherit (config.yomaq.tailscale) tailnetName;
+  inherit (config.cpritchett.impermanence) backup;
+  inherit (config.cpritchett.impermanence) dontBackup;
+  inherit (config.cpritchett.tailscale) tailnetName;
   inherit (config.system) stateVersion;
 in
 {
-  options.yomaq.nixos-containers."${NAME}".enable = lib.mkEnableOption (lib.mdDoc "${NAME} Server");
+  options.cpritchett.nixos-containers."${NAME}".enable = lib.mkEnableOption (lib.mdDoc "${NAME} Server");
 
   config = lib.mkIf cfg.enable {
 
@@ -21,7 +21,7 @@ in
       "d ${dontBackup}/nixos-containers/${NAME}/tailscale"
     ];
 
-    yomaq.homepage.groups.services.services = [{
+    cpritchett.homepage.groups.services.services = [{
       "${NAME}" = {
         icon = "mdi-list-status";
         href = "https://${hostName}-${NAME}.${tailnetName}.ts.net/";
@@ -30,7 +30,7 @@ in
     }];
 
     #will still need to set the network device name manually
-    yomaq.network.useBr0 = true;
+    cpritchett.network.useBr0 = true;
 
     containers."${hostName}-${NAME}" = {
       autoStart = true;
@@ -55,13 +55,13 @@ in
       ephemeral = true;
       config = {
         imports = [
-          inputs.self.nixosModules.yomaq
+          inputs.self.nixosModules.cpritchett
           (inputs.self + /users/admin)
         ];
         system.stateVersion = stateVersion;
         age.identityPaths = ["/etc/ssh/${hostName}"];
 
-        yomaq = {
+        cpritchett = {
           suites = {
             container.enable = true;
             };
@@ -77,7 +77,7 @@ in
           "d /var/lib/gatus/data 0755 gatus"
         ];
 
-        yomaq.gatus.enable = true;
+        cpritchett.gatus.enable = true;
         services.gatus = {
           enable = true;
           settings ={
@@ -104,8 +104,8 @@ in
             }];
             alerting = {
               ntfy = {
-                url = "${config.yomaq.ntfy.ntfyUrl}";
-                topic = "${config.yomaq.ntfy.defaultTopic}";
+                url = "${config.cpritchett.ntfy.ntfyUrl}";
+                topic = "${config.cpritchett.ntfy.defaultTopic}";
                 priority = 3;
                 default-alert = {
                   enable = true;
@@ -119,7 +119,7 @@ in
         };
 
         ## example of how to add a gatus monitor in another module
-        # yomaq.gatus.endpoints = [{
+        # cpritchett.gatus.endpoints = [{
         #   name = "gatus test test";
         #   group = "webapps";
         #   url = "https://${hostName}-${NAME}.${tailnetName}.ts.net/";

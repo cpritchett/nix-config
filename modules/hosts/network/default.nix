@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.yomaq.network;
+  cfg = config.cpritchett.network;
 in
 {
-  options.yomaq.network = {
+  options.cpritchett.network = {
     basics  = mkOption {
       type = types.bool;
       default = false;

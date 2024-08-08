@@ -1,10 +1,10 @@
 { options, config, lib, pkgs, inputs, ... }:
 with lib;
 let
-  cfg = config.yomaq.zsh;
+  cfg = config.cpritchett.zsh;
 in
 {
-  options.yomaq.zsh = {
+  options.cpritchett.zsh = {
     enable = mkOption {
       type = types.bool;
       default = false;

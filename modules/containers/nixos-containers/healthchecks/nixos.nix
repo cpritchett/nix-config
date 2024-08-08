@@ -3,16 +3,16 @@ let
 
   NAME = "healthchecks";
 
-  cfg = config.yomaq.nixos-containers."${NAME}";
+  cfg = config.cpritchett.nixos-containers."${NAME}";
 
   inherit (config.networking) hostName;
-  inherit (config.yomaq.impermanence) backup;
-  inherit (config.yomaq.impermanence) dontBackup;
-  inherit (config.yomaq.tailscale) tailnetName;
+  inherit (config.cpritchett.impermanence) backup;
+  inherit (config.cpritchett.impermanence) dontBackup;
+  inherit (config.cpritchett.tailscale) tailnetName;
   inherit (config.system) stateVersion;
 in
 {
-  options.yomaq.nixos-containers."${NAME}".enable = lib.mkEnableOption (lib.mdDoc "${NAME} Server");
+  options.cpritchett.nixos-containers."${NAME}".enable = lib.mkEnableOption (lib.mdDoc "${NAME} Server");
 
   config = lib.mkIf cfg.enable {
 
@@ -24,7 +24,7 @@ in
       "d ${backup}/nixos-containers/${NAME}/data 0755 admin"
     ];
 
-    yomaq.homepage.groups.services.services = [{
+    cpritchett.homepage.groups.services.services = [{
       "${NAME}" = {
         icon = "mdi-bell-badge";
         href = "https://${hostName}-${NAME}.${tailnetName}.ts.net/";
@@ -32,7 +32,7 @@ in
       };
     }];
 
-    yomaq.gatus.endpoints = [{
+    cpritchett.gatus.endpoints = [{
       name = "${hostName}-${NAME}";
       group = "webapps";
       url = "https://${hostName}-${NAME}.${tailnetName}.ts.net/";
@@ -50,7 +50,7 @@ in
     }];
 
     #will still need to set the network device name manually
-    yomaq.network.useBr0 = true;
+    cpritchett.network.useBr0 = true;
 
     containers."${hostName}-${NAME}" = {
       autoStart = true;
@@ -75,13 +75,13 @@ in
       ephemeral = true;
       config = {
         imports = [
-          inputs.self.nixosModules.yomaq
+          inputs.self.nixosModules.cpritchett
           (inputs.self + /users/admin)
         ];
         system.stateVersion = stateVersion;
         age.identityPaths = ["/etc/ssh/${hostName}"];
 
-        yomaq = {
+        cpritchett = {
           suites = {
             container.enable = true;
             };
@@ -95,7 +95,7 @@ in
 
         age.secrets.healthchecks.file = ( inputs.self + /secrets/healthchecks.age);
 
-        yomaq.healthchecks = {
+        cpritchett.healthchecks = {
           enable = true;
           settings.ALLOWED_HOSTS = ["${hostName}-${NAME}.${tailnetName}.ts.net"];
           settings.SITE_ROOT = "https://${hostName}-${NAME}.${tailnetName}.ts.net";

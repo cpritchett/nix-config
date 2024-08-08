@@ -3,14 +3,14 @@
 
 with lib;
 let
-  cfg = config.yomaq.autoUpgrade;
+  cfg = config.cpritchett.autoUpgrade;
   # Only enable auto upgrade if current config came from a clean tree
   # This avoids accidental auto-upgrades when working locally.
   inherit (config.networking) hostName;
   isClean = inputs.self ? rev;
 in
 {
-  options.yomaq.autoUpgrade = {
+  options.cpritchett.autoUpgrade = {
     enable = mkOption {
       type = types.bool;
       default = false;
@@ -27,7 +27,7 @@ in
       flags = [
         "--refresh"
       ];
-      flake = github:yomaq/nix-config;
+      flake = github:cpritchett/nix-config;
     };
 
     # Only run if current config (self) is older than the new one.
@@ -44,21 +44,21 @@ in
       onSuccess = ["nixos-upgrade-success.service"];
     };
     systemd.services.nixos-upgrade-fail = lib.mkIf config.system.autoUpgrade.enable {
-      script = ''${lib.getExe pkgs.curl} -H "t: NixOS Flake host rebuild failure" ${config.yomaq.ntfy.defaultPriority} -d "${hostName} failed to rebuild" ${config.yomaq.ntfy.ntfyUrl}${config.yomaq.ntfy.defaultTopic}'';
-      #${lib.getExe pkgs.curl} -X POST ${config.yomaq.gatus.url}/api/v1/endpoints/Nixos-Host-Auto-Rebuilds_${hostName}/external?success=true -H "Authorization: Bearer nixos"
+      script = ''${lib.getExe pkgs.curl} -H "t: NixOS Flake host rebuild failure" ${config.cpritchett.ntfy.defaultPriority} -d "${hostName} failed to rebuild" ${config.cpritchett.ntfy.ntfyUrl}${config.cpritchett.ntfy.defaultTopic}'';
+      #${lib.getExe pkgs.curl} -X POST ${config.cpritchett.gatus.url}/api/v1/endpoints/Nixos-Host-Auto-Rebuilds_${hostName}/external?success=true -H "Authorization: Bearer nixos"
 
     };
     systemd.services.nixos-upgrade-success = lib.mkIf config.system.autoUpgrade.enable {
-      script = ''${lib.getExe pkgs.curl} -fsS -m 10 --retry 5 ${config.yomaq.healthcheckUrl.nixos-upgrade."${hostName}"}'';
-      # ${lib.getExe pkgs.curl} -X POST ${config.yomaq.gatus.url}/api/v1/endpoints/Nixos-Host-Auto-Rebuilds_${hostName}/external?success=false -H "Authorization: Bearer nixos"
+      script = ''${lib.getExe pkgs.curl} -fsS -m 10 --retry 5 ${config.cpritchett.healthcheckUrl.nixos-upgrade."${hostName}"}'';
+      # ${lib.getExe pkgs.curl} -X POST ${config.cpritchett.gatus.url}/api/v1/endpoints/Nixos-Host-Auto-Rebuilds_${hostName}/external?success=false -H "Authorization: Bearer nixos"
     };
 
     ### not working, need to test more
-    # yomaq.gatus.externalEndpoints = [{
+    # cpritchett.gatus.externalEndpoints = [{
     #   name = "${hostName}";
     #   group = "Nixos Host Auto Rebuilds";
     #   token = "nixos";
-    #   url = config.yomaq.gatus.url;
+    #   url = config.cpritchett.gatus.url;
     #   conditions = [
     #     "[CONNECTED] == true"
     #   ];

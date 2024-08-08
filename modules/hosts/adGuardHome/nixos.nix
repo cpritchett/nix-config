@@ -1,13 +1,13 @@
 { options, config, lib, pkgs, ... }:
 with lib;
 let
-  cfg = config.yomaq.adguardhome;
+  cfg = config.cpritchett.adguardhome;
   inherit (config.networking) hostName;
-  inherit (config.yomaq.impermanence) backup;
-  inherit (config.yomaq.tailscale) tailnetName;
+  inherit (config.cpritchett.impermanence) backup;
+  inherit (config.cpritchett.tailscale) tailnetName;
 in
 {
-  options.yomaq.adguardhome = {
+  options.cpritchett.adguardhome = {
     enable = mkOption {
       type = types.bool;
       default = false;
@@ -27,7 +27,7 @@ in
       enable = true;
       allowDHCP = true;
     };
-    yomaq.homepage.groups.services.services = [{
+    cpritchett.homepage.groups.services.services = [{
       DNS = {
         icon = "si-adguard";
         href = "{{HOMEPAGE_VAR_ADGUARD_IP}}";

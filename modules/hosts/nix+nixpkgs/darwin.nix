@@ -2,7 +2,7 @@
 
 with lib;
 let
-  cfg = config.yomaq.nixSettings;
+  cfg = config.cpritchett.nixSettings;
 in
 {
   imports = [
@@ -20,7 +20,7 @@ in
       settings = {
         auto-optimise-store = true;
         allowed-users = [
-          "carln"
+          "cpritchett"
         ];
       };
     };

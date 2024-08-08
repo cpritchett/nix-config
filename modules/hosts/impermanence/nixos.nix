@@ -5,7 +5,7 @@ with lib;
   imports = [inputs.impermanence.nixosModules.impermanence];
 
 
-  options.yomaq.impermanence = {
+  options.cpritchett.impermanence = {
     backup = mkOption {
       type = types.str;
       default = "/persist/save";
@@ -23,7 +23,7 @@ with lib;
     };
   };
   config = {
-    yomaq.impermanence.backup = mkIf config.yomaq.disks.amReinstalling "/tmp";
-    yomaq.impermanence.backupStorage = mkIf config.yomaq.disks.amReinstalling "/tmp";
+    cpritchett.impermanence.backup = mkIf config.cpritchett.disks.amReinstalling "/tmp";
+    cpritchett.impermanence.backupStorage = mkIf config.cpritchett.disks.amReinstalling "/tmp";
   };
 }

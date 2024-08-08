@@ -1,17 +1,17 @@
 { config, lib, pkgs, inputs, modulesPath, ... }:
 let
-  cfg = config.yomaq.homepage;
+  cfg = config.cpritchett.homepage;
   settingsFormat = pkgs.formats.yaml { };
   listOfHosts = lib.attrNames inputs.self.nixosConfigurations;
-  mergeConfig = configKey: lib.mkMerge (map (hostname: lib.mkIf (inputs.self.nixosConfigurations."${hostname}".config.yomaq.homepage."${configKey}" != []) 
-      inputs.self.nixosConfigurations."${hostname}".config.yomaq.homepage."${configKey}") listOfHosts);
-  mergeServiceGroups = configKey: lib.mkMerge (map (hostname: lib.mkIf (inputs.self.nixosConfigurations."${hostname}".config.yomaq.homepage.groups.services."${configKey}" != []) 
-    inputs.self.nixosConfigurations."${hostname}".config.yomaq.homepage.groups.services."${configKey}") listOfHosts);
-  mergeBookmarksGroups = configKey: lib.mkMerge (map (hostname: lib.mkIf (inputs.self.nixosConfigurations."${hostname}".config.yomaq.homepage.groups.bookmarks"${configKey}" != []) 
-    inputs.self.nixosConfigurations."${hostname}".config.yomaq.homepage.groups.bookmarks"${configKey}") listOfHosts);
+  mergeConfig = configKey: lib.mkMerge (map (hostname: lib.mkIf (inputs.self.nixosConfigurations."${hostname}".config.cpritchett.homepage."${configKey}" != []) 
+      inputs.self.nixosConfigurations."${hostname}".config.cpritchett.homepage."${configKey}") listOfHosts);
+  mergeServiceGroups = configKey: lib.mkMerge (map (hostname: lib.mkIf (inputs.self.nixosConfigurations."${hostname}".config.cpritchett.homepage.groups.services."${configKey}" != []) 
+    inputs.self.nixosConfigurations."${hostname}".config.cpritchett.homepage.groups.services."${configKey}") listOfHosts);
+  mergeBookmarksGroups = configKey: lib.mkMerge (map (hostname: lib.mkIf (inputs.self.nixosConfigurations."${hostname}".config.cpritchett.homepage.groups.bookmarks"${configKey}" != []) 
+    inputs.self.nixosConfigurations."${hostname}".config.cpritchett.homepage.groups.bookmarks"${configKey}") listOfHosts);
 in
 {
-  options.yomaq.homepage = {
+  options.cpritchett.homepage = {
     enable = lib.mkEnableOption (lib.mdDoc "Homepage Dashboard");
 
     bookmarks = lib.mkOption {
@@ -31,7 +31,7 @@ in
       default = { };
     };
   };
-  options.yomaq.homepage.groups = {
+  options.cpritchett.homepage.groups = {
     services = {
       services =lib.mkOption {
         inherit (settingsFormat) type;
@@ -60,7 +60,7 @@ in
     ##### Service configuration
     #####
 
-    yomaq.homepage = {
+    cpritchett.homepage = {
     ### Bookmark and service groups cannot have the same names.
     ### Empty lists will break the config
     ### Also add the layout for the group below.
@@ -106,7 +106,7 @@ in
         theme = "dark"; # or light
         hideVersion = "true";
         useEqualHeights = true;
-        favicon = "https://azure-dufs.sable-chimaera.ts.net/strawberry/favicon.ico";
+        favicon = "https://azure-dufs.lynx-justice.ts.net/strawberry/favicon.ico";
         statusStyle = "dot";
 
         layout = {

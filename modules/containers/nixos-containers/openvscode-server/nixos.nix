@@ -3,16 +3,16 @@ let
 
   NAME = "openvscode";
 
-  cfg = config.yomaq.nixos-containers.openvscode;
+  cfg = config.cpritchett.nixos-containers.openvscode;
 
   inherit (config.networking) hostName;
-  inherit (config.yomaq.impermanence) backup;
-  inherit (config.yomaq.impermanence) dontBackup;
-  inherit (config.yomaq.tailscale) tailnetName;
+  inherit (config.cpritchett.impermanence) backup;
+  inherit (config.cpritchett.impermanence) dontBackup;
+  inherit (config.cpritchett.tailscale) tailnetName;
   inherit (config.system) stateVersion;
 in
 {
-  options.yomaq.nixos-containers.openvscode.enable = lib.mkEnableOption (lib.mdDoc "Openvscode Server");
+  options.cpritchett.nixos-containers.openvscode.enable = lib.mkEnableOption (lib.mdDoc "Openvscode Server");
 
   config = lib.mkIf cfg.enable {
 
@@ -25,7 +25,7 @@ in
     ];
 
 
-    yomaq.homepage.groups.services.services = [{
+    cpritchett.homepage.groups.services.services = [{
       "Code Server" = {
         icon = "si-visualstudiocode";
         href = "https://${hostName}-${NAME}.${tailnetName}.ts.net/";
@@ -34,7 +34,7 @@ in
     }];
 
     #will still need to set the network device name manually
-    yomaq.network.useBr0 = true;
+    cpritchett.network.useBr0 = true;
 
     containers."${hostName}-${NAME}" = {
       autoStart = true;
@@ -71,13 +71,13 @@ in
       ephemeral = true;
       config = {
         imports = [
-          inputs.self.nixosModules.yomaq
+          inputs.self.nixosModules.cpritchett
           (inputs.self + /users/admin)
           ];
         system.stateVersion = stateVersion;
         age.identityPaths = ["/etc/ssh/${hostName}"];
 
-        yomaq = {
+        cpritchett = {
           suites = {
             container.enable = true;
             };

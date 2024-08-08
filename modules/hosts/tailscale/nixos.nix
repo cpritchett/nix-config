@@ -3,7 +3,7 @@
 
 with lib;
 let
-  cfg = config.yomaq.tailscale;
+  cfg = config.cpritchett.tailscale;
 
   inherit (config.networking) hostName;
 in
@@ -19,13 +19,13 @@ in
       permitCertUid = "caddy";
     };
 
-    environment.persistence."${config.yomaq.impermanence.dontBackup}" = {
+    environment.persistence."${config.cpritchett.impermanence.dontBackup}" = {
       hideMounts = true;
       directories = [
         "/var/lib/tailscale"
       ];
     };
-    yomaq.tailscale.tailnetName = "sable-chimaera";
+    cpritchett.tailscale.tailnetName = "lynx-justice";
     age.secrets.tailscaleKey.file = ( inputs.self + /secrets/tailscaleKey.age);
 
     environment.systemPackages = with pkgs; [

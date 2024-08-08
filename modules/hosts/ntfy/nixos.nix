@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.yomaq.ntfy;
+  cfg = config.cpritchett.ntfy;
 in
 {
-  options.yomaq.ntfy = {
+  options.cpritchett.ntfy = {
     ntfyUrl = mkOption {
       type = types.str;
       default = "";
@@ -26,8 +26,8 @@ in
   };
 
   config = {
-    yomaq.ntfy = {
-      ntfyUrl = "https://azure-ntfy.sable-chimaera.ts.net/";
+    cpritchett.ntfy = {
+      ntfyUrl = "https://azure-ntfy.lynx-justice.ts.net/";
       defaultTopic = "ntfy";
       defaultPriority = "p:3";
     };
@@ -35,4 +35,4 @@ in
 }
 
 # example:
-# "curl -H ${config.yomaq.ntfy.defaultPriority} -d "message goes here" ${config.yomaq.ntfy.ntfyUrl}${config.yomaq.ntfy.defaultTopic}"
+# "curl -H ${config.cpritchett.ntfy.defaultPriority} -d "message goes here" ${config.cpritchett.ntfy.ntfyUrl}${config.cpritchett.ntfy.defaultTopic}"

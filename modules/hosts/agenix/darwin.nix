@@ -1,7 +1,7 @@
 { config, lib, pkgs, inputs, ... }:
 let
   inherit (config.networking) localHostName;
-  cfg = config.yomaq.agenix;
+  cfg = config.cpritchett.agenix;
 in
 {
   imports = [ inputs.agenix.darwinModules.default ];

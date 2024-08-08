@@ -2,7 +2,7 @@
 
 with lib;
 let
-  cfg = config.yomaq.network;
+  cfg = config.cpritchett.network;
 in
 {
 

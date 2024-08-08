@@ -2,11 +2,11 @@
 
 with lib;
 let
-  cfg = config.yomaq.flatpak;
-  inherit (config.yomaq.impermanence) dontBackup;
+  cfg = config.cpritchett.flatpak;
+  inherit (config.cpritchett.impermanence) dontBackup;
 in
 {
-  options.yomaq.flatpak = {
+  options.cpritchett.flatpak = {
     enable = mkOption {
       type = types.bool;
       default = false;

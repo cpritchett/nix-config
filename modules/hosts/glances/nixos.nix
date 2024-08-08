@@ -5,15 +5,15 @@
 , ...
 }:
 let
-  cfg = config.yomaq.glances;
+  cfg = config.cpritchett.glances;
 
   inherit (config.networking) hostName;
-  inherit (config.yomaq.impermanence) dontBackup;
-  inherit (config.yomaq.tailscale) tailnetName;
+  inherit (config.cpritchett.impermanence) dontBackup;
+  inherit (config.cpritchett.tailscale) tailnetName;
 in
 {
   options = {
-    yomaq.glances = {
+    cpritchett.glances = {
       enable = lib.mkEnableOption (lib.mdDoc "Glances Server");
       package = lib.mkPackageOptionMD pkgs "glances" { };
     };
@@ -35,7 +35,7 @@ in
       };
     };
 
-    yomaq.glances.package = pkgs.glances;
+    cpritchett.glances.package = pkgs.glances;
     services.static-web-server = {
       enable = true;
       root = "${dontBackup}/lastUpdate/";
@@ -46,8 +46,8 @@ in
       '';
     };
 
-    yomaq.homepage.services = 
-      (lib.optional (config.yomaq.homepage.enable) {"Flake" = [
+    cpritchett.homepage.services = 
+      (lib.optional (config.cpritchett.homepage.enable) {"Flake" = [
         {"flake.lock last update"={
           widget = {
             type = "customapi";
@@ -155,7 +155,7 @@ in
         };}
       ];}
     ];
-    yomaq.homepage.settings = {
+    cpritchett.homepage.settings = {
       layout = {
         Flake = {
           icon = "si-nixos";

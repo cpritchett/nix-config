@@ -2,7 +2,7 @@
 {
   imports =[
     # import custom modules
-    inputs.self.nixosModules.yomaq
+    inputs.self.nixosModules.cpritchett
     # import users
     (inputs.self + /users/admin)
     # hardware
@@ -11,12 +11,12 @@
     inputs.nixos-hardware.nixosModules.common-cpu-intel
   ];
   config = {
-    networking.hostName = "pearl";
+    networking.hostName = "zephyr";
     system.stateVersion = "23.11";
     boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sdhci_pci" ];
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-    yomaq = {
+    cpritchett = {
       tailscale = {
         enable = true;
         extraUpFlags = ["--ssh=true" "--reset=true" "--accept-dns=false" ];
@@ -26,7 +26,7 @@
       adguardhome.enable = true;
 
       autoUpgrade.enable = true;
-      primaryUser.users = [ "admin" ];
+      primaryUser.users = [ "cpritchett" ];
       timezone.central= true;
       syncoid.enable = true;
       suites = {
@@ -39,10 +39,10 @@
         systemd-boot = true;
         zfs = {
           enable = true;
-          hostID = "3F8C6B19";
+          hostID = "AACFDF54";
           root = {
-            encrypt = false;
-            disk1 = "disk/by-id/scsi-2SAMSUNG";
+            encrypt = true;
+            disk1 = "disk/by-id/ata-SanDisk_Ultra_II_480GB_163116801910";
             impermanenceRoot = true;
           };
         };

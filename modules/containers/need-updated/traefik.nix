@@ -6,12 +6,12 @@ let
   NAME = "traefik";
   IMAGE = "docker.io/traefik";
   defaultVersion = "v3.0";
-  cfg = config.yomaq.pods.${NAME};
+  cfg = config.cpritchett.pods.${NAME};
   inherit (config.networking) hostName;
-  inherit (config.yomaq.tailscale) tailnetName;
+  inherit (config.cpritchett.tailscale) tailnetName;
 in
 {
-  options.yomaq.pods.${NAME} = {
+  options.cpritchett.pods.${NAME} = {
     enable = mkOption {
       type = types.bool;
       default = false;

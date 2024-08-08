@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.yomaq.suites.container;
+  cfg = config.cpritchett.suites.container;
 in
 {
-  options.yomaq.suites.container = {
+  options.cpritchett.suites.container = {
     enable = mkOption {
       type = types.bool;
       default = false;
@@ -15,7 +15,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    yomaq = {
+    cpritchett = {
       zsh.enable =true;
       agenix.enable = true;
       nixSettings.enable = true;

@@ -1,6 +1,6 @@
 { inputs, lib, config, pkgs, ... }: {
   imports = [
-    inputs.self.homeManagerModules.yomaq
+    inputs.self.homeManagerModules.cpritchett
     ];
 # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.05";
@@ -13,11 +13,11 @@
   programs = {
     git = {
       enable = true;
-      userEmail = "yomaq@bsjm.xyz";
-      userName = "yomaq";
+      userEmail = "chad@chadpritchett.com";
+      userName = "cpritchett";
     };
   };
-  yomaq = {
+  cpritchett = {
     suites.basic.enable = true;
     nixvim.enable = true;
   };

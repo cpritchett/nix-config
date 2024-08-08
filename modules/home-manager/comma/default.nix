@@ -1,12 +1,12 @@
 { options, config, lib, pkgs, inputs, ... }:
 let
-  cfg = config.yomaq.comma;
+  cfg = config.cpritchett.comma;
 in
 {
   imports = [
     inputs.nix-index-database.hmModules.nix-index
   ];
-  options.yomaq.comma = {
+  options.cpritchett.comma = {
     enable = with lib; mkOption {
       type = types.bool;
       default = false;

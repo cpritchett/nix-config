@@ -4,7 +4,7 @@
 
 with lib;
 let
-  cfg = config.yomaq.tailscale;
+  cfg = config.cpritchett.tailscale;
 in
 {
  config = lib.mkIf cfg.enable {

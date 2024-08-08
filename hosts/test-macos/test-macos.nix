@@ -1,11 +1,11 @@
 { inputs, lib, config, pkgs, ... }: 
 let
-  hostname = "midnight";
+  hostname = "test-macos";
 in
 {
   imports = [
     inputs.home-manager.darwinModules.home-manager
-    inputs.self.darwinModules.yomaq
+    inputs.self.darwinModules.cpritchett
     {home-manager.useUserPackages = true;}
   ];
 
@@ -27,10 +27,10 @@ in
       extraSpecialArgs = { inherit inputs; };
       users = {
         # Import your home-manager configuration
-        carln = import ../../users/carln/homeManager;
+        cpritchett = import ../../users/cpritchett/homeManager;
       };
     };
-    yomaq = {
+    cpritchett = {
       yabai.enable = true;
       tailscale.enable = true;
       _1password.enable = true;

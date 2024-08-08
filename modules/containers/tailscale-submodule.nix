@@ -6,10 +6,10 @@ let
   NAME = "tailscale";
   IMAGE = "ghcr.io/tailscale/tailscale";
 
-  cfg = config.yomaq.pods.tailscaled;
+  cfg = config.cpritchett.pods.tailscaled;
   inherit (config.networking) hostName;
-  inherit (config.yomaq.impermanence) dontBackup;
-  inherit (config.yomaq.tailscale) tailnetName;
+  inherit (config.cpritchett.impermanence) dontBackup;
+  inherit (config.cpritchett.tailscale) tailnetName;
 
   containerOpts = { name, config, ... }: 
     let
@@ -139,7 +139,7 @@ let
   ];
 in
 {
-  options.yomaq.pods = {
+  options.cpritchett.pods = {
     tailscaled = mkOption {
       default = {};
       type = with types; attrsOf (submodule containerOpts);
@@ -157,9 +157,9 @@ in
     };
   };
   config = mkIf (cfg != {}) {
-    age.secrets."tailscaleOAuthEnvFile".file = config.yomaq.pods.tailscaleAgenixKey;
+    age.secrets."tailscaleOAuthEnvFile".file = config.cpritchett.pods.tailscaleAgenixKey;
 
-    systemd.tmpfiles.rules = lib.flatten ( lib.mapAttrsToList (name: cfg: mkTmpfilesRules name cfg) config.yomaq.pods.tailscaled);
-    virtualisation.oci-containers.containers = lib.mapAttrs mkContainer config.yomaq.pods.tailscaled;
+    systemd.tmpfiles.rules = lib.flatten ( lib.mapAttrsToList (name: cfg: mkTmpfilesRules name cfg) config.cpritchett.pods.tailscaled);
+    virtualisation.oci-containers.containers = lib.mapAttrs mkContainer config.cpritchett.pods.tailscaled;
   };
 }

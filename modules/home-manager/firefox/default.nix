@@ -15,10 +15,10 @@
 
 with lib;
 let
-  cfg = config.yomaq.firefox;
+  cfg = config.cpritchett.firefox;
 in
 {
-  options.yomaq.firefox = {
+  options.cpritchett.firefox = {
     enable = mkOption {
       type = types.bool;
       default = false;

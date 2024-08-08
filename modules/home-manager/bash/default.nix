@@ -1,10 +1,10 @@
 { options, config, lib, pkgs, inputs, ... }:
 let
-  cfg = config.yomaq.bash;
+  cfg = config.cpritchett.bash;
 in
 {
   imports = [];
-  options.yomaq.bash = {
+  options.cpritchett.bash = {
     enable = with lib; mkOption {
       type = types.bool;
       default = false;

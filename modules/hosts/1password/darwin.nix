@@ -1,6 +1,6 @@
 { options, config, lib, pkgs, ... }:
 let
-  cfg = config.yomaq._1password;
+  cfg = config.cpritchett._1password;
 in
 {
  config = lib.mkIf cfg.enable {
