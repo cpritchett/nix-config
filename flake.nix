@@ -60,31 +60,26 @@
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild switch --flake .#your-hostname'
       nixosConfigurations = {
-        blue = nixpkgs.lib.nixosSystem {
+        zephyr = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; }; 
-          modules = [ ./hosts/blue ];
+          modules = [ ./hosts/zephyr ];
         };
-        azure = nixpkgs.lib.nixosSystem {
+        test-nixos = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; }; 
-          modules = [ ./hosts/azure ];
+          modules = [ ./hosts/test-nixos ];
         };
-        carob = nixpkgs.lib.nixosSystem {
+        test-macos = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; }; 
-          modules = [ ./hosts/carob ];
+          modules = [ ./hosts/test-macos];
         };
-        teal = nixpkgs.lib.nixosSystem {
+        flotilla = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; }; 
-          modules = [ ./hosts/teal ];
-        };
-        smalt = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; }; 
-          modules = [ ./hosts/smalt ];
-        };
+          modules = [ ./hosts/flotilla ];
+        };        
         # green = nixpkgs.lib.nixosSystem {
         #   system = "x86_64-linux";
         #   specialArgs = { inherit inputs; }; 
@@ -98,13 +93,13 @@
       };
       # Nix-darwin configuration entrypoint
       # Available through 'darwin-rebuild switch --flake .#your-hostname'
-      darwinConfigurations = {
-        midnight = nix-darwin.lib.darwinSystem {
-          specialArgs = { inherit inputs; };
-          system = "aarch64-darwin"; 
-          modules = [ ./hosts/midnight ];
-        };
-      };
+      #darwinConfigurations = {
+      #  midnight = nix-darwin.lib.darwinSystem {
+      #    specialArgs = { inherit inputs; };
+      #    system = "aarch64-darwin"; 
+      #    modules = [ ./hosts/midnight ];
+      #  };
+      #};
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#your-username@your-hostname'
       homeConfigurations = {

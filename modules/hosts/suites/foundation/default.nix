@@ -16,10 +16,10 @@ in
 
   config = mkIf cfg.enable {
     cpritchett = {
-      zsh.enable =true;
+      zsh.enable = true;
       agenix.enable = true;
       nixSettings.enable = true;
-      tailscale.enable = true;
+      tailscale.enable = false;
       network.basics = true;
     };
   };
