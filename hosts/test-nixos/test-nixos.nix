@@ -13,19 +13,20 @@
   config = {
     networking.hostName = "test-nixos";
     system.stateVersion = "23.11";
-    boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sdhci_pci" ];
+    boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sdhci_pci" "virtio" "nvme" "vmd" "sr_mod" ];
+    #boot.supportedFilesystems = [ "btrfs" "ext2" "ext3" "ext4" "exfat" "f2fs" "fat8" "fat16" "fat32" "ntfs" "xfs" ];
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
     cpritchett = {
       tailscale = {
-        enable = false;
+        enable = true;
         extraUpFlags = ["--ssh=true" "--reset=true" "--accept-dns=false" ];
         useRoutingFeatures = "client";
         authKeyFile = null;
       };
       adguardhome.enable = false;
 
-      autoUpgrade.enable = true;
+      autoUpgrade.enable = false;
       primaryUser.users = [ "cpritchett" ];
       timezone.central= true;
       syncoid.enable = false;
@@ -37,13 +38,17 @@
       disks = {
         enable = true;
         systemd-boot = true;
+        initrd-ssh = {
+      	  enable = true;
+          ethernetDrivers = ["virtio_net"];
+        };
         zfs = {
           enable = true;
           hostID = "20ABD697";
           root = {
             encrypt = true;
             disk1 = "sda";
-            impermanenceRoot = false;
+            impermanenceRoot = true;
           };
         };
       };

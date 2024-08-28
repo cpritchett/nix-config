@@ -19,7 +19,7 @@ in
       zsh.enable = true;
       agenix.enable = true;
       nixSettings.enable = true;
-      tailscale.enable = false;
+      tailscale.enable = true;
       network.basics = true;
     };
   };
